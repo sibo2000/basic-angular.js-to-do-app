@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="ToDo">
+<!-- ng-app initialise the app, if you give it a name, initailise it below -->
+<head>
+<title>AngularJS 20 min</title>
+</head>
+
+	<link rel="stylesheet" href="css/normalize.css">
+	<link rel="stylesheet" href="css/foundation.min.css">
+	<style>
+
+	.done {
+		text-decoration: line-through;
+		color: #ccc;
+	}
+	</style>
+<body>
+
+	<div class="row">
+		<div class="small-12 columns" ng-controller="todoController">	
+
+			<form name"frm" ng-submit="addTodo()"><!-- When this form is submitted, run the 'addTodo' function -->
+				<input type="text" name="newtodo" ng-model="newTodo" required /><!-- Give the input the name 'newTodo', that way it can push the value of this (when the form is submitted) to the $scope --> 
+				<button ng-disabled="frm.$invalid">Go</button><!-- Disable the go button if the form is empty -->
+			</form>			
+				
+			<button ng-click="clearCompleted()">Clear completed</button><!-- Run the clearCompleted function when this button is clicked -->
+
+			<ul>
+				<li ng-repeat="todo in todos"><!-- creats a template that loops through the todos -->
+					<input type="checkbox" ng-model="todo.done" /><!-- Add a toggle to set tododone to true or false -->
+					<span ng-class="{'done':todo.done}">{{ todo.title }}</span><!-- If tododone is true turn on the 'done' class -->
+				</li>
+			</ul>
+		</div>
+	</div>
+
+
+	<script src="js/angular.js"></script>
+
+	<script>
+
+		// sets 'app' to do my angular stuff
+		var app = angular.module('ToDo',[]);
+
+		// the controller for my todo stuff
+
+		app.controller('todoController',function($scope){
+			
+			// Stores all the data
+			$scope.todos = [
+				{'title':'build app', 'done':false}
+			];
+
+			$scope.addTodo = function(){
+				$scope.todos.push({'title':$scope.newTodo,'done':false}) // push some more data into the todos scope
+				$scope.newTodo = '' // after that clear the todo input feild
+			}
+			
+			$scope.clearCompleted = function(){
+				$scope.todos = $scope.todos.filter(function(item){
+					return !item.done
+				})
+			}
+
+		});
+
+
+	</script>
+
+</body>
+</html>
