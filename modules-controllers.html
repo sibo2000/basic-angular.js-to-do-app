@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="friendApp">
+<head>
+<title>AngularJS 20 min</title>
+</head>
+
+	<link rel="stylesheet" href="../css/normalize.css">
+	<link rel="stylesheet" href="../css/foundation.min.css">
+
+<body>
+	<div class="row" ng-controller="FriendController">
+		<div class="small-12 columns">
+
+			<input type="text" ng-model="searchText">	
+			{{ searchText }}	
+
+
+			<input type="text" ng-model="foo">	
+			{{ foo }}		
+
+			<ul>
+				<li ng-repeat="friend in friends | filter:searchText">
+					{{ friend.name }} <strong> {{ friend.hair }}</strong>
+				</li>
+			</ul>
+
+		</div>
+	</div>
+
+	<script src="js/angular.js"></script>
+
+	<script>
+
+	// Creates the module for the app
+	var app = angular.module('friendApp',[]);
+
+	app.controller('FriendController', function($scope) {
+		$scope.friends = [
+			{"id":1, "name":"ted", "hair":"blonde" },
+			{"id":2, "name":"bill", "hair":"ginger" },
+			{"id":3, "name":"fred", "hair":"black" }
+		];
+	});
+
+	</script>   
+
+</body>
+</html>

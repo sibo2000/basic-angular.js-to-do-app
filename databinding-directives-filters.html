@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en" ng-app>
+<head>
+<title>AngularJS 20 min</title>
+</head>
+
+	<link rel="stylesheet" href="css/normalize.css">
+	<link rel="stylesheet" href="css/foundation.min.css">
+
+<!-- NG init, adds some data to the global scope -->
+<body ng-init="friends=['bill', 'ted', 'john', 'alan']">
+	<div class="row">
+		<div class="small-12 columns">
+
+			<!-- Creat a modal on the input, then spit out the value below -->
+			<input type="text" ng-model="searchText">	
+			{{ searchText }}		
+
+			<!-- Create a template showing the data in the global scope, then filter it with the search text -->
+			<ul>
+				<li ng-repeat="friend in friends | filter:searchText">
+					{{ friend }}
+				</li>
+			</ul>
+
+		</div>
+	</div>
+
+	<script src="js/angular.js"></script>
+
+</body>
+</html>
